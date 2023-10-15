@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">yobi-test</string>
+    <string name="user_image">user image</string>
 </resources>
