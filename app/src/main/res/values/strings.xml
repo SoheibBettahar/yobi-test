@@ -4,4 +4,7 @@
     <string name="retry">Retry</string>
     <string name="no_users_available">No users available.</string>
     <string name="an_error_happened">An Error Happened.</string>
+    <string name="search">search</string>
+    <string name="clear_search_text_icon">Clear search text icon</string>
+    <string name="search_by_name">Search by name</string>
 </resources>
