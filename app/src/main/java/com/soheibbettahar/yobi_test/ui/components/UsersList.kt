@@ -46,6 +46,8 @@ import com.soheibbettahar.yobi_test.data.model.User
 import com.soheibbettahar.yobi_test.ui.theme.Gray300
 import kotlinx.coroutines.flow.flowOf
 
+private const val USER_ITEM_TYPE = 0
+private const val FOOTER_ITEM_TYPE = 1
 
 @Composable
 fun UsersList(
@@ -64,14 +66,17 @@ fun UsersList(
         contentPadding = PaddingValues(top = 8.dp, bottom = 16.dp)
     ) {
 
-        items(count = users.itemCount, key = users.itemKey()) { index ->
+        items(
+            count = users.itemCount,
+            key = users.itemKey(),
+            contentType = { USER_ITEM_TYPE }) { index ->
             val user = users[index]
             if (user == null) PlaceHolderItem()
             else UserItem(user = user, onClick = onUserItemClick)
         }
 
         if (isAppendLoading || isAppendError) {
-            item {
+            item(contentType = { FOOTER_ITEM_TYPE }) {
                 Footer(
                     isLoading = isAppendLoading, isError = isAppendError, retry = onRetryClick
                 )
