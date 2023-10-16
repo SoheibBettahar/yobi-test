@@ -23,6 +23,8 @@ import com.soheibbettahar.yobi_test.data.model.User
 import com.soheibbettahar.yobi_test.ui.components.SearchTextField
 import com.soheibbettahar.yobi_test.ui.components.UsersList
 import com.soheibbettahar.yobi_test.ui.components.users
+import com.soheibbettahar.yobi_test.ui.util.isAppendError
+import com.soheibbettahar.yobi_test.ui.util.isAppendLoading
 import com.soheibbettahar.yobi_test.ui.util.isRefreshEmpty
 import com.soheibbettahar.yobi_test.ui.util.isRefreshError
 import com.soheibbettahar.yobi_test.ui.util.isRefreshLoading
@@ -47,7 +49,9 @@ fun UsersScreen(pagingItems: LazyPagingItems<User>) {
         Box(modifier = Modifier.fillMaxSize()) {
 
             if (pagingItems.isRefreshSuccess()) {
-                UsersList(users = pagingItems)
+                UsersList(users = pagingItems,
+                    isAppendLoading = pagingItems.isAppendLoading(),
+                    isAppendError = pagingItems.isAppendError())
             }
 
             if (pagingItems.isRefreshLoading()) {

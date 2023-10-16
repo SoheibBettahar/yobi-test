@@ -2,6 +2,7 @@ package com.soheibbettahar.yobi_test.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -15,12 +16,18 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -45,7 +52,10 @@ fun UsersList(
     modifier: Modifier = Modifier,
     users: LazyPagingItems<User>,
     listState: LazyListState = rememberLazyListState(),
-    onUserItemClick: (User) -> Unit = {}
+    isAppendLoading: Boolean = false,
+    isAppendError: Boolean = false,
+    onUserItemClick: (User) -> Unit = {},
+    onRetryClick: () -> Unit = {}
 ) {
 
     LazyColumn(
@@ -58,6 +68,14 @@ fun UsersList(
             val user = users[index]
             if (user == null) PlaceHolderItem()
             else UserItem(user = user, onClick = onUserItemClick)
+        }
+
+        if (isAppendLoading || isAppendError) {
+            item {
+                Footer(
+                    isLoading = isAppendLoading, isError = isAppendError, retry = onRetryClick
+                )
+            }
         }
 
     }
@@ -141,6 +159,60 @@ fun PlaceHolderItem(modifier: Modifier = Modifier) {
 @Composable
 fun PlaceHolderItemPreview() {
     PlaceHolderItem()
+}
+
+
+@Composable
+fun Footer(
+    modifier: Modifier = Modifier,
+    isLoading: Boolean = true,
+    isError: Boolean = false,
+    retry: () -> Unit = {}
+) {
+    Box(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        if (isLoading) CircularProgressIndicator(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(vertical = 12.dp)
+                .size(24.dp),
+            strokeWidth = 2.dp,
+        )
+
+        if (isError)
+            IconButton(modifier = Modifier.align(Alignment.Center), onClick = retry) {
+                Icon(
+                    modifier = Modifier.size(28.dp),
+                    imageVector = Icons.Default.Refresh,
+                    contentDescription = "Refresh"
+                )
+            }
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun FooterPreview() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start
+    ) {
+        Footer(
+            modifier = Modifier
+                .background(Color.Green)
+                .weight(1f),
+            isLoading = true,
+            isError = false
+        )
+
+        Footer(
+            modifier = Modifier
+                .background(Color.Red)
+                .weight(1f), isLoading = false, isError = true
+        )
+    }
 }
 
 
