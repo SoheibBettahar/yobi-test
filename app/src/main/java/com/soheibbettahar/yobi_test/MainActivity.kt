@@ -6,12 +6,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.paging.compose.collectAsLazyPagingItems
-import com.soheibbettahar.yobi_test.ui.screens.UsersScreen
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import com.soheibbettahar.yobi_test.ui.navigation.UsersRoute
+import com.soheibbettahar.yobi_test.ui.navigation.usersScreen
 import com.soheibbettahar.yobi_test.ui.theme.YobitestTheme
-import com.soheibbettahar.yobi_test.ui.viewmodels.UsersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,14 +28,29 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val usersViewModel: UsersViewModel = hiltViewModel()
-                    val usersPagingItems = usersViewModel.usersPagingDataFlow.collectAsLazyPagingItems()
-                    UsersScreen(usersPagingItems)
+                    val navController = rememberNavController()
+                    YobitesNavHost(navController =  navController)
                 }
             }
         }
     }
 
+
+    @Composable
+    private fun YobitesNavHost(
+        navController: NavHostController,
+        startDestination: String = UsersRoute
+    ) {
+
+        NavHost(navController = navController, startDestination = startDestination) {
+
+            usersScreen {
+                TODO("To bo implemented")
+            }
+
+        }
+
+    }
 
 
 
