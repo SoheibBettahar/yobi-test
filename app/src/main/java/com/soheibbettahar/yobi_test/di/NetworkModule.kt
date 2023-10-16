@@ -1,5 +1,6 @@
 package com.soheibbettahar.yobi_test.di
 
+import com.soheibbettahar.yobi_test.data.network.HeadersInterceptor
 import com.soheibbettahar.yobi_test.data.network.UserService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -28,6 +29,7 @@ object NetworkModule {
         }
 
         return OkHttpClient.Builder()
+            .addInterceptor(HeadersInterceptor())
             .addInterceptor(loggingInterceptor)
             .connectTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
