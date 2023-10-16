@@ -18,7 +18,7 @@ class UserRepositoryImpl @Inject constructor(
     override fun fetchUsers(): Flow<PagingData<User>> = Pager(
         config = PagingConfig(
             pageSize = PAGE_SIZE,
-            enablePlaceholders = false
+            enablePlaceholders = true
         ),
         pagingSourceFactory = {
             UsersPagingSource(userService)
