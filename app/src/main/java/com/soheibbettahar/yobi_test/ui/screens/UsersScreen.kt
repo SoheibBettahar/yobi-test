@@ -32,7 +32,7 @@ import com.soheibbettahar.yobi_test.ui.util.isRefreshSuccess
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
-fun UsersScreen(pagingItems: LazyPagingItems<User>) {
+fun UsersScreen(pagingItems: LazyPagingItems<User>, onUserClick: (User) -> Unit = {}) {
 
     Column(
         modifier = Modifier
@@ -49,9 +49,14 @@ fun UsersScreen(pagingItems: LazyPagingItems<User>) {
         Box(modifier = Modifier.fillMaxSize()) {
 
             if (pagingItems.isRefreshSuccess()) {
-                UsersList(users = pagingItems,
+                UsersList(
+                    users = pagingItems,
                     isAppendLoading = pagingItems.isAppendLoading(),
-                    isAppendError = pagingItems.isAppendError())
+                    isAppendError = pagingItems.isAppendError(),
+                    onUserItemClick = onUserClick,
+                    onRetryClick = pagingItems::retry
+                )
+
             }
 
             if (pagingItems.isRefreshLoading()) {
@@ -62,7 +67,7 @@ fun UsersScreen(pagingItems: LazyPagingItems<User>) {
                 ErrorLayout(
                     modifier = Modifier
                         .align(Alignment.Center),
-                    onRetryClick = { pagingItems.refresh() },
+                    onRetryClick = pagingItems::refresh,
                 )
             }
 
