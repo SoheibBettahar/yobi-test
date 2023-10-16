@@ -41,6 +41,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.soheibbettahar.yobi_test.R
 import com.soheibbettahar.yobi_test.data.model.User
+import com.soheibbettahar.yobi_test.ui.components.SearchTextField
 import com.soheibbettahar.yobi_test.ui.theme.Gray300
 import com.soheibbettahar.yobi_test.ui.util.isRefreshEmpty
 import com.soheibbettahar.yobi_test.ui.util.isRefreshError
@@ -50,6 +51,46 @@ import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun UsersScreen(pagingItems: LazyPagingItems<User>) {
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 16.dp)
+    ) {
+
+        SearchTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp)
+        )
+
+        Box(modifier = Modifier.fillMaxSize()) {
+
+            if (pagingItems.isRefreshSuccess()) {
+                UsersList(users = pagingItems)
+            }
+
+            if (pagingItems.isRefreshLoading()) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            }
+
+            if (pagingItems.isRefreshError()) {
+                ErrorLayout(
+                    modifier = Modifier
+                        .align(Alignment.Center),
+                    onRetryClick = { pagingItems.refresh() },
+                )
+            }
+
+
+            if (pagingItems.isRefreshEmpty()) {
+                EmptyStateLayout(modifier = Modifier.align(Alignment.Center))
+            }
+
+        }
+
+
+    }
 
 }
 
@@ -69,7 +110,11 @@ fun EmptyStateLayoutPreview() {
 @Composable
 fun ErrorLayout(modifier: Modifier = Modifier, onRetryClick: () -> Unit = {}) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(modifier = modifier, text = stringResource(R.string.an_error_happened), textAlign = TextAlign.Center)
+        Text(
+            modifier = modifier,
+            text = stringResource(R.string.an_error_happened),
+            textAlign = TextAlign.Center
+        )
 
         Button(
             modifier = modifier,
@@ -84,7 +129,6 @@ fun ErrorLayout(modifier: Modifier = Modifier, onRetryClick: () -> Unit = {}) {
 fun ErrorLayoutPreview() {
     ErrorLayout()
 }
-
 
 
 @Composable
