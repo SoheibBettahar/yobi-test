@@ -1,13 +1,24 @@
 package com.soheibbettahar.yobi_test.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,6 +42,10 @@ import coil.request.ImageRequest
 import com.soheibbettahar.yobi_test.R
 import com.soheibbettahar.yobi_test.data.model.User
 import com.soheibbettahar.yobi_test.ui.theme.Gray300
+import com.soheibbettahar.yobi_test.ui.util.isRefreshEmpty
+import com.soheibbettahar.yobi_test.ui.util.isRefreshError
+import com.soheibbettahar.yobi_test.ui.util.isRefreshLoading
+import com.soheibbettahar.yobi_test.ui.util.isRefreshSuccess
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
@@ -90,12 +105,14 @@ fun UsersList(
 
     LazyColumn(
         modifier = modifier,
-        state = listState
+        state = listState,
+        contentPadding = PaddingValues(top = 8.dp, bottom = 16.dp)
     ) {
 
         items(count = users.itemCount, key = users.itemKey()) { index ->
             val user = users[index]
-            if (user != null) UserItem(user = user, onClick = onUserItemClick)
+            if (user == null) PlaceHolderItem()
+            else UserItem(user = user, onClick = onUserItemClick)
         }
 
     }
@@ -113,7 +130,9 @@ fun UsersListPreview() {
 @Composable
 fun UserItem(modifier: Modifier = Modifier, user: User, onClick: (User) -> Unit = {}) {
     ListItem(
-        modifier = modifier.clickable { onClick(user) },
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onClick(user) },
         headlineContent = {
             Text(
                 text = user.fullName,
@@ -137,6 +156,40 @@ fun UserItem(modifier: Modifier = Modifier, user: User, onClick: (User) -> Unit 
 
         }
     )
+}
+
+@Composable
+fun PlaceHolderItem(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        Box(
+            modifier = Modifier
+                .size(50.dp)
+                .clip(CircleShape)
+                .background(color = Gray300)
+        )
+
+        Spacer(modifier = Modifier.width(16.dp))
+
+        Box(
+            modifier = Modifier
+                .size(height = 16.dp, width = 200.dp)
+                .clip(RoundedCornerShape(4.dp))
+                .background(color = Gray300)
+        )
+
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PlaceHolderItemPreview() {
+    PlaceHolderItem()
 }
 
 
