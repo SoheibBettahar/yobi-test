@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">yobi-test</string>
     <string name="user_image">user image</string>
+    <string name="retry">Retry</string>
+    <string name="no_users_available">No users available.</string>
+    <string name="an_error_happened">An Error Happened.</string>
 </resources>

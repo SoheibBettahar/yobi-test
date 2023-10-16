@@ -1,20 +1,24 @@
 package com.soheibbettahar.yobi_test.ui.screens
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,6 +37,26 @@ import kotlinx.coroutines.flow.flowOf
 fun UsersScreen(pagingItems: LazyPagingItems<User>) {
 
 }
+
+@Composable
+fun ErrorLayout(modifier: Modifier = Modifier, onRetryClick: () -> Unit = {}) {
+    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(modifier = modifier, text = stringResource(R.string.an_error_happened), textAlign = TextAlign.Center)
+
+        Button(
+            modifier = modifier,
+            onClick = onRetryClick,
+        ) { Text(text = stringResource(R.string.retry)) }
+    }
+
+}
+
+@Preview
+@Composable
+fun ErrorLayoutPreview() {
+    ErrorLayout()
+}
+
 
 
 @Composable
