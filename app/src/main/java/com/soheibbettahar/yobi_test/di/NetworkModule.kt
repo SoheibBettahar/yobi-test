@@ -48,7 +48,7 @@ object NetworkModule {
 
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl("https://dummyapi.io/data/v1")
+            .baseUrl("https://dummyapi.io/data/v1/")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }
