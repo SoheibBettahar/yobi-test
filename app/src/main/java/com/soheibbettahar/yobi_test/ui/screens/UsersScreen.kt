@@ -30,15 +30,16 @@ import com.soheibbettahar.yobi_test.ui.theme.Gray300
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
-fun UsersScreen() {
-    Text(text = "Users Screen")
+fun UsersScreen(pagingItems: LazyPagingItems<User>) {
+
 }
 
 
 @Composable
 @Preview(showBackground = true)
 fun UsersScreenPreview() {
-    UsersScreen()
+    val pagingItems = flowOf(PagingData.from(users)).collectAsLazyPagingItems()
+    UsersScreen(pagingItems)
 }
 
 

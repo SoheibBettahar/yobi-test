@@ -7,8 +7,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.soheibbettahar.yobi_test.ui.screens.UsersScreen
 import com.soheibbettahar.yobi_test.ui.theme.YobitestTheme
+import com.soheibbettahar.yobi_test.ui.viewmodels.UsersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,7 +26,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    UsersScreen()
+                    val usersViewModel: UsersViewModel = hiltViewModel()
+                    val usersPagingItems = usersViewModel.usersPagingDataFlow.collectAsLazyPagingItems()
+                    UsersScreen(usersPagingItems)
                 }
             }
         }
