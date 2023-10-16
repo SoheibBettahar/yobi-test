@@ -38,6 +38,19 @@ fun UsersScreen(pagingItems: LazyPagingItems<User>) {
 
 }
 
+
+@Composable
+fun EmptyStateLayout(modifier: Modifier = Modifier) {
+    Text(modifier = modifier, text = stringResource(R.string.no_users_available))
+}
+
+@Preview(showBackground = true)
+@Composable
+fun EmptyStateLayoutPreview() {
+    EmptyStateLayout()
+}
+
+
 @Composable
 fun ErrorLayout(modifier: Modifier = Modifier, onRetryClick: () -> Unit = {}) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
