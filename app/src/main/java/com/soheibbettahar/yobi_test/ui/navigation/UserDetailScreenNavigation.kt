@@ -2,6 +2,7 @@ package com.soheibbettahar.yobi_test.ui.navigation
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
@@ -20,6 +21,11 @@ fun NavGraphBuilder.userDetailScreen() {
         UserDetailScreen()
     }
 
+}
+
+fun NavHostController.navigateToUserDetailScreen(userId: String) {
+    val route = "$UserDetailRoute/$userId"
+    navigateSingleTopTo(route)
 }
 
 
