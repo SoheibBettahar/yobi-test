@@ -9,8 +9,9 @@ import com.soheibbettahar.yobi_test.data.model.User
 import com.soheibbettahar.yobi_test.data.network.UserService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class UserRepositoryImpl(
+class UserRepositoryImpl @Inject constructor(
     private val userService: UserService,
     private val dispatchIo: CoroutineDispatcher
 ) : UserRepository {
@@ -20,7 +21,7 @@ class UserRepositoryImpl(
             enablePlaceholders = false
         ),
         pagingSourceFactory = {
-            UsersPagingSource( userService)
+            UsersPagingSource(userService)
         }
     ).flow
 
