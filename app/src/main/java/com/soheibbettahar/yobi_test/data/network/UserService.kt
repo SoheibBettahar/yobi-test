@@ -1,12 +1,13 @@
 package com.soheibbettahar.yobi_test.data.network
 
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.Query
 
 
 interface UserService {
 
-    @GET("users")
+    @GET("user")
     suspend fun fetchUsers(
         @Query("page") page: Int,
         @Query("limit") limit: Int
