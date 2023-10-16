@@ -7,10 +7,13 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.soheibbettahar.yobi_test.data.model.User
 import com.soheibbettahar.yobi_test.data.repository.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 
-class UsersViewModel(
+@HiltViewModel
+class UsersViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val usersRepository: UserRepository
 ) : ViewModel() {
