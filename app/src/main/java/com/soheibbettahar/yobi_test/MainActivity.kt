@@ -12,6 +12,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.soheibbettahar.yobi_test.ui.navigation.UsersRoute
+import com.soheibbettahar.yobi_test.ui.navigation.navigateToUserDetailScreen
+import com.soheibbettahar.yobi_test.ui.navigation.userDetailScreen
 import com.soheibbettahar.yobi_test.ui.navigation.usersScreen
 import com.soheibbettahar.yobi_test.ui.theme.YobitestTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +31,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    YobitesNavHost(navController =  navController)
+                    YobitesNavHost(navController = navController)
                 }
             }
         }
@@ -44,14 +46,13 @@ class MainActivity : ComponentActivity() {
 
         NavHost(navController = navController, startDestination = startDestination) {
 
-            usersScreen {
-                TODO("To bo implemented")
-            }
+            usersScreen { userId -> navController.navigateToUserDetailScreen(userId) }
+
+            userDetailScreen()
 
         }
 
     }
-
 
 
 }
