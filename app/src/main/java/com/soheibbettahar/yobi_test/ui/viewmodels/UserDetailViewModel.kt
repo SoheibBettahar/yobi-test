@@ -34,11 +34,11 @@ class UserDetailViewModel @Inject constructor(
     val userDetailUiState = _userDetailUiState.asStateFlow()
 
     init {
-        fetchUserDetail(userId)
+        fetchUserDetail()
     }
 
 
-    fun fetchUserDetail(userId: String) {
+    fun fetchUserDetail() {
             userRepository
                 .fetchUserDetail(userId = userId)
                 .map { userDetail -> _userDetailUiState.value = UserDetailUiState.Success(userDetail) }
