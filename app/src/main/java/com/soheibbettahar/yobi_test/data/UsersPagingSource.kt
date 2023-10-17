@@ -11,7 +11,7 @@ import retrofit2.HttpException
 private const val STARTING_PAGE_INDEX = 0
 const val PAGE_SIZE = 20
 
-class UsersPagingSource(private val userService: UserService) :
+class UsersPagingSource(private val searchText: String, private val userService: UserService) :
     PagingSource<Int, User>() {
 
 
@@ -22,9 +22,12 @@ class UsersPagingSource(private val userService: UserService) :
             val searchResponse = userService.fetchUsers(page, PAGE_SIZE)
 
             val total = searchResponse.total ?: 0
-            val isNexPageAvailable = (page * PAGE_SIZE + searchResponse.users.size) < total
+            val isNexPageAvailable = (page + 1) * PAGE_SIZE < total
 
             val users = searchResponse.users.map { it.asExternalModel() }
+                .filter {
+                    searchText.isEmpty() || it.fullName.lowercase().contains(searchText.lowercase())
+                }
 
             LoadResult.Page(
                 data = users,
@@ -44,6 +47,5 @@ class UsersPagingSource(private val userService: UserService) :
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
-
 
 }
