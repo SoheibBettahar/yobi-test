@@ -14,9 +14,12 @@ fun NavGraphBuilder.usersScreen(onNavigateToUserDetailScreen: (userId: String) -
     composable(UsersRoute) {
         val viewModel: UsersViewModel = hiltViewModel()
         val usersPagingItems = viewModel.usersPagingDataFlow.collectAsLazyPagingItems()
+        val searchText = viewModel.searchTerm
 
         UsersScreen(
             pagingItems = usersPagingItems,
+            searchText = searchText,
+            onSearchTextChanged = viewModel::onSearchTermChanged,
             onNavigateToUserDetailScreen = onNavigateToUserDetailScreen
         )
     }

@@ -5,14 +5,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.PagingData
@@ -32,11 +30,12 @@ import com.soheibbettahar.yobi_test.ui.util.isRefreshLoading
 import com.soheibbettahar.yobi_test.ui.util.isRefreshSuccess
 import com.soheibbettahar.yobi_test.ui.util.refreshError
 import kotlinx.coroutines.flow.flowOf
-import java.lang.Error
 
 @Composable
 fun UsersScreen(
     pagingItems: LazyPagingItems<User>,
+    searchText: String = "",
+    onSearchTextChanged: (String) -> Unit = {},
     onNavigateToUserDetailScreen: (userId: String) -> Unit = {}
 ) {
 
@@ -49,7 +48,9 @@ fun UsersScreen(
         SearchTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp)
+                .padding(start = 16.dp, end = 16.dp),
+            searchText = searchText,
+            onTextChanged = onSearchTextChanged
         )
 
         Box(modifier = Modifier.fillMaxSize()) {
