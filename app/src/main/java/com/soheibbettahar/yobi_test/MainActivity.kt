@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
@@ -23,6 +25,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
             YobitestTheme {
                 // A surface container using the 'background' color from the theme
@@ -30,21 +35,31 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val navController = rememberNavController()
-                    YobitesNavHost(navController = navController)
+                    YobitestApp(modifier = Modifier.statusBarsPadding())
                 }
             }
         }
     }
 
+    @Composable
+    private fun YobitestApp(modifier: Modifier = Modifier) {
+        val navController = rememberNavController()
+        YobitesNavHost(modifier = modifier, navController = navController)
+    }
+
 
     @Composable
     private fun YobitesNavHost(
+        modifier: Modifier = Modifier,
         navController: NavHostController,
         startDestination: String = UsersRoute
     ) {
 
-        NavHost(navController = navController, startDestination = startDestination) {
+        NavHost(
+            modifier = modifier,
+            navController = navController,
+            startDestination = startDestination
+        ) {
 
             usersScreen { userId -> navController.navigateToUserDetailScreen(userId) }
 
