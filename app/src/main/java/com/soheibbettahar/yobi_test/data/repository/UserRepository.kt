@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
 
-    fun fetchUsers(): Flow<PagingData<User>>
+    fun fetchUsers(searchText: String): Flow<PagingData<User>>
 
     fun fetchUserDetail(userId: String): Flow<UserDetail>
 

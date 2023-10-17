@@ -19,13 +19,13 @@ class UserRepositoryImpl @Inject constructor(
     private val userService: UserService,
     private val dispatchIo: CoroutineDispatcher
 ) : UserRepository {
-    override fun fetchUsers(): Flow<PagingData<User>> = Pager(
+    override fun fetchUsers(searchText: String): Flow<PagingData<User>> = Pager(
         config = PagingConfig(
             pageSize = PAGE_SIZE,
             enablePlaceholders = true
         ),
         pagingSourceFactory = {
-            UsersPagingSource(userService)
+            UsersPagingSource(searchText, userService)
         }
     ).flow
 
