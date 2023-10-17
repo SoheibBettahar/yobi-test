@@ -19,7 +19,7 @@
     <string name="city">City</string>
     <string name="country">Country</string>
     <string name="flag_icon">Flag icon</string>
-    <string name="time_zone">Time zone</string>
+    <string name="time_zone">Time zone offset</string>
     <string name="clock_icon">Clock icon</string>
     <string name="city_icon">City icon</string>
     <string name="home_icon">Home icon</string>
