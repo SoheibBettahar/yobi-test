@@ -29,7 +29,7 @@ This app uses MVVM architecture and follows [Guide to app architecture](https://
 - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle)
 - [Paging library](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
 - [Kotlin coroutines](https://developer.android.com/kotlin/coroutines)
-- [Retorift](https://square.github.io/retrofit/)
+- [Retrofit](https://square.github.io/retrofit/)
 - [Moshi](https://github.com/square/moshi)
 - [OkHttp](https://square.github.io/okhttp/)
 - [Coil](https://coil-kt.github.io/coil/)
