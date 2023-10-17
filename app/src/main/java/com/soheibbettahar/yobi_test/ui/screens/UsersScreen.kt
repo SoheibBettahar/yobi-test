@@ -20,6 +20,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.soheibbettahar.yobi_test.R
 import com.soheibbettahar.yobi_test.data.model.User
+import com.soheibbettahar.yobi_test.ui.components.ErrorLayout
 import com.soheibbettahar.yobi_test.ui.components.SearchTextField
 import com.soheibbettahar.yobi_test.ui.components.UsersList
 import com.soheibbettahar.yobi_test.ui.components.users
@@ -109,31 +110,4 @@ fun EmptyStateLayoutPreview() {
     EmptyStateLayout()
 }
 
-
-@Composable
-fun ErrorLayout(
-    modifier: Modifier = Modifier,
-    error: Throwable? = null,
-    onRetryClick: () -> Unit = {}
-) {
-    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(
-            modifier = modifier,
-            text = stringResource(R.string.an_error_happened),
-            textAlign = TextAlign.Center
-        )
-
-        Button(
-            modifier = modifier,
-            onClick = onRetryClick,
-        ) { Text(text = stringResource(R.string.retry)) }
-    }
-
-}
-
-@Preview
-@Composable
-fun ErrorLayoutPreview() {
-    ErrorLayout()
-}
 
