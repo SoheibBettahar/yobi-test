@@ -39,4 +39,4 @@ This app uses MVVM architecture and follows [Guide to app architecture](https://
   - Hiding API keys: For simplicity, the API key (app-id) used in this project is provided in the codebase. In production environments they need to be hidden and fetched at build time (using secrets.properties and BuildConfig).
   - Better error handling: In this project when an error happens due to any reason you only  get a message saying "An Error Happened". In a production environment would be expressive, to provide a good experience to the user.
   
-   And other features that are more obvious like:  splash screen, app icon, better user interface, documentation, better gradle dependency management...etc
+   And other features that are more obvious like:  hadling process death, splash screen, app icon, better user interface, documentation, better gradle dependency management...etc
