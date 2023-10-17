@@ -7,8 +7,9 @@ import com.soheibbettahar.yobi_test.data.model.User
 fun LazyPagingItems<User>.isRefreshSuccess() =
     loadState.refresh is LoadState.NotLoading && itemCount != 0
 
-fun LazyPagingItems<User>.isRefreshEmpty() = loadState.source.refresh is LoadState.NotLoading
-        && itemCount == 0
+fun LazyPagingItems<User>.isRefreshEmpty() =
+    loadState.source.refresh is LoadState.NotLoading && loadState.append is LoadState.NotLoading
+            && itemCount == 0
 
 fun LazyPagingItems<User>.isRefreshLoading() = loadState.refresh == LoadState.Loading
 
