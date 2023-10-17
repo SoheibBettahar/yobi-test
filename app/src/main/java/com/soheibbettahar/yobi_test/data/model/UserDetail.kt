@@ -11,4 +11,11 @@ class UserDetail(
     val dateOfBirth: String,
     val phone: String,
     val location: Location
-)
+){
+    val fullName: String
+        get() = when {
+            title.isEmpty() -> "$firstName $lastName"
+            firstName.isEmpty() -> "$title.$lastName"
+            else -> "$title.$firstName $lastName"
+        }.trim()
+}
