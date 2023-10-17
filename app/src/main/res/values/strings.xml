@@ -7,4 +7,24 @@
     <string name="search">search</string>
     <string name="clear_search_text_icon">Clear search text icon</string>
     <string name="search_by_name">Search by name</string>
+    <string name="personal_info">Personal info</string>
+    <string name="full_name">Full name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="email_address">Email address</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="gender">Gender</string>
+    <string name="gender_icon">Gender icon</string>
+    <string name="location">Location</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+    <string name="flag_icon">Flag icon</string>
+    <string name="time_zone">Time zone</string>
+    <string name="clock_icon">Clock icon</string>
+    <string name="city_icon">City icon</string>
+    <string name="home_icon">Home icon</string>
+    <string name="cake_icon">Cake icon</string>
+    <string name="mail_icon">Mail icon</string>
+    <string name="phone_number_icon">Phone number icon</string>
+    <string name="person_icon">Person icon</string>
 </resources>
