@@ -16,7 +16,7 @@ const val UserDetailRoute = "UserDetail"
 
 private const val USER_ID_ARG = "userId"
 
-fun NavGraphBuilder.userDetailScreen() {
+fun NavGraphBuilder.userDetailScreen(onNavigateUp: () -> Unit) {
 
     composable(
         route = "$UserDetailRoute/{$USER_ID_ARG}",
@@ -25,7 +25,11 @@ fun NavGraphBuilder.userDetailScreen() {
         val viewModel: UserDetailViewModel = hiltViewModel()
         val userDetailUiState by viewModel.userDetailUiState.collectAsStateWithLifecycle()
 
-        UserDetailScreen(userDetailUiState)
+        UserDetailScreen(
+            userDetailUiState = userDetailUiState,
+            onRetry = viewModel::fetchUserDetail,
+            onNavigateUp = onNavigateUp
+        )
     }
 
 }
