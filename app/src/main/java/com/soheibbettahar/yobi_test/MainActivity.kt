@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
 
             usersScreen { userId -> navController.navigateToUserDetailScreen(userId) }
 
-            userDetailScreen()
+            userDetailScreen(onNavigateUp = navController::navigateUp)
 
         }
 
