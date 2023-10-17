@@ -29,7 +29,9 @@ import com.soheibbettahar.yobi_test.ui.util.isRefreshEmpty
 import com.soheibbettahar.yobi_test.ui.util.isRefreshError
 import com.soheibbettahar.yobi_test.ui.util.isRefreshLoading
 import com.soheibbettahar.yobi_test.ui.util.isRefreshSuccess
+import com.soheibbettahar.yobi_test.ui.util.refreshError
 import kotlinx.coroutines.flow.flowOf
+import java.lang.Error
 
 @Composable
 fun UsersScreen(
@@ -70,6 +72,7 @@ fun UsersScreen(
                 ErrorLayout(
                     modifier = Modifier
                         .align(Alignment.Center),
+                    error = pagingItems.refreshError().error,
                     onRetryClick = pagingItems::refresh,
                 )
             }
@@ -108,7 +111,11 @@ fun EmptyStateLayoutPreview() {
 
 
 @Composable
-fun ErrorLayout(modifier: Modifier = Modifier, onRetryClick: () -> Unit = {}) {
+fun ErrorLayout(
+    modifier: Modifier = Modifier,
+    error: Throwable? = null,
+    onRetryClick: () -> Unit = {}
+) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             modifier = modifier,
