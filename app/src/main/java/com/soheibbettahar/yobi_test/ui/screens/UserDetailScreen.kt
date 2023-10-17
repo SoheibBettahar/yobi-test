@@ -18,7 +18,6 @@ import androidx.compose.material.icons.outlined.Flag
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.LocationCity
 import androidx.compose.material.icons.outlined.Male
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Phone
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.CircularProgressIndicator
@@ -135,20 +134,22 @@ fun UserDetailLayout(userDetail: UserDetail) {
             error = ColorPainter(Gray300)
         )
 
+        Spacer(modifier = Modifier.height(24.dp))
 
-        Spacer(modifier = Modifier.height(42.dp))
+
+        Text(
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            text = userDetail.fullName,
+            style = MaterialTheme.typography.titleLarge
+        )
+
+
+        Spacer(modifier = Modifier.height(60.dp))
 
         Text(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             text = stringResource(R.string.personal_info),
             style = MaterialTheme.typography.labelLarge
-        )
-
-        InfoItem(
-            title = stringResource(R.string.full_name),
-            content = userDetail.fullName,
-            icon = Icons.Outlined.Person,
-            contentDescription = stringResource(R.string.person_icon)
         )
 
         InfoItem(
